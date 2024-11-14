@@ -10,14 +10,17 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-
-import os
-from pathlib import Path
 import pymysql
 from pathlib import Path
+import os
+from datetime import timedelta
+
+pymysql.version_info = (1, 4, 0, 'final', 0)
+pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -41,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_filters',
     'rest_framework',
     'Jwt',
     'rest_framework_simplejwt.token_blacklist',
@@ -83,22 +87,28 @@ WSGI_APPLICATION = 'dits.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME':'Dits',
-        'USER':'root',
-        'PASSWORD':'vasu1234',
-        'HOST':'localhost',
-        'PORT':3306
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dits',
+        'USER': 'root',
+        'PASSWORD': 'vasu@1234',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
+
 
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+   
 }
-
 
 
 # Password validation
