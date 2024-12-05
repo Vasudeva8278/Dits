@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_filters',
     'rest_framework',
+    'rest_framework_simplejwt',
     'Jwt',
     'rest_framework_simplejwt.token_blacklist',
 
@@ -93,6 +94,7 @@ DATABASES = {
         'PASSWORD': 'vasu@1234',
         'HOST': 'localhost',
         'PORT': '3306',
+        
     }
 }
 
@@ -100,6 +102,8 @@ DATABASES = {
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
+
+
 
 
 
@@ -153,3 +157,13 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SIMPLE_JWT = {
+    'BLACKLIST_AFTER_ROTATION': True,
+}
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [],
+    'DEFAULT_PERMISSION_CLASSES': [],
+}
